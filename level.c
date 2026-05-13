@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "level.h"
+
+const int PC_HP_MAX = 500;
+const int PC_STAT_MAX = 100;
 
 int level_table[] = {
     -10000,    // Level 0 (mostly unused)
@@ -28,11 +32,21 @@ int level_table[] = {
 };
 
 ClassData class_list[] = {
-    {MONK, "Monk", {10, 20, 13, 15, 8, 16, 11, 5}},
-    {ROGUE, "Rogue", {10, 25, 10, 8, 15, 13, 7, 13}},
-    {FIGHTER, "Fighter", {20, 7, 18, 12, 4, 12, 14, 10}},
-    {PRIESTESS, "Priestess", {6, 10, 12, 24, 10, 15, 18, 20}},
-    {MAGE, "Mage", {8, 15, 5, 16, 23, 17, 13, 12}}
+    {MONK, "Monk", {10, 20, 13, 15, 8, 16, 11, 5},
+        {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW}
+    },
+    {ROGUE, "Rogue", {10, 25, 10, 8, 15, 13, 7, 13},
+        {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG}
+    },
+    {FIGHTER, "Fighter", {20, 7, 18, 12, 4, 12, 14, 10},
+        {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG}
+    },
+    {PRIESTESS, "Priestess", {6, 10, 12, 24, 10, 15, 18, 20},
+        {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH}
+    },
+    {MAGE, "Mage", {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG}
+    }
 };
 
 ClassData* getClassData(Class class) {
@@ -57,11 +71,53 @@ int getLevel(Adventurer* pc) {
     return level;
 }
 
+void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
+    int increase = 0;
+    int max = *growth_rate;
+    increase = (rand() % max + 1);
+    pc->max_hp += increase;
+    pc->hp += increase;
+    if (pc->max_hp > PC_HP_MAX) {
+        pc->max_hp = PC_HP_MAX;
+    }
+    if (pc->hp > PC_HP_MAX) {
+        pc->hp = PC_HP_MAX;
+    }
+}
+
+void calculateStatGrowth(int* stat, StatGrowthRate* growth_rate) {
+    int increase = 0;
+    // switch(*growth_rate) {
+        // TODO add proper switch case logic here later
+        // default:
+            int max = (int) *growth_rate;
+            increase = (rand() % max + 1);
+    // }
+    (*stat) += increase;
+
+    if (*stat > PC_STAT_MAX) {
+        printf("Reset from max: %d\n", *stat);
+        *stat = PC_STAT_MAX;
+    }
+}
+
 void levelUp(Adventurer* pc, int currentLevel) {
     int newLevel = getLevel(pc);
     while (currentLevel < newLevel) {
         // Just get stat boosts for each level for now
-        // TODO finish this
+        Attributes* stats = &pc->attributes;
+        ClassData* class = getClassData(pc->class);
+        AttributeGrowthRates* growth_rates = &class->stat_growth;
+        calculateHpGrowth(pc, &growth_rates->hp);
+        calculateStatGrowth(&stats->str, &growth_rates->str);
+        calculateStatGrowth(&stats->dex, &growth_rates->dex);
+        calculateStatGrowth(&stats->vit, &growth_rates->vit);
+        calculateStatGrowth(&stats->spr, &growth_rates->spr);
+        calculateStatGrowth(&stats->intel, &growth_rates->intel);
+        calculateStatGrowth(&stats->awa, &growth_rates->awa);
+        calculateStatGrowth(&stats->cha, &growth_rates->cha);
+        calculateStatGrowth(&stats->lck, &growth_rates->lck);
+        currentLevel++;
     }
 }
 

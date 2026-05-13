@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "struct.h"
 #include "level.h"
@@ -17,6 +18,7 @@ Player createInitialPlayer(char* name, Class class, int exp, int max_hp, int sta
     Attributes* stats = getBaseAttributes(class);
     Adventurer hero = {name, exp, max_hp, max_hp, class, *stats};
     Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
+    levelUp(&hero, 1);
     *party_members = hero;
     Party party = {party_members, 1};
     Player player = {party, starting_money, starting_location};
@@ -37,7 +39,14 @@ char* getClass(Adventurer* pc) {
     }
 }
 
+void printStats(Adventurer* pc) {
+    printf("%s   Level %d %s\nHP %d/%d\n", pc->name, getLevel(pc), getClass(pc), pc->hp, pc->max_hp);
+    printf("Strength:     %2d   Dexterity: %2d   Vitality: %2d   Spirit: %2d\n", pc->attributes.str, pc->attributes.dex, pc->attributes.vit, pc->attributes.spr);
+    printf("Intelligence: %2d   Awareness: %2d   Charisma: %2d   Luck:   %2d\n", pc->attributes.intel, pc->attributes.awa, pc->attributes.cha, pc->attributes.lck);
+}
+
 int main() {
+    srand(time(NULL));
     char name[MAX_NAME_LENGTH];
     int exp = 500, max_hp = 12, money = 300, location = 0;
     printf("Okay, let's get you started!\n");
@@ -61,9 +70,8 @@ int main() {
     printf("Current Location: %s\n", locations[player.location]);
     printf("Current Money: $%d\n", player.money);
     Adventurer hero = player.party.party_members[0];
-    printf("Party:\n%s   Level %d %s\nHP %d/%d\n", hero.name, getLevel(&hero), getClass(&hero), hero.hp, hero.max_hp);
-    printf("Strength:     %2d   Dexterity: %2d   Vitality: %2d   Spirit: %2d\n", hero.attributes.str, hero.attributes.dex, hero.attributes.vit, hero.attributes.spr);
-    printf("Intelligence: %2d   Awareness: %2d   Charisma: %2d   Luck:   %2d\n", hero.attributes.intel, hero.attributes.awa, hero.attributes.cha, hero.attributes.lck);
+    printf("Party:\n");
+    printStats(&hero);
 
     cleanupPlayerData(&player);
 
