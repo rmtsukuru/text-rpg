@@ -28,7 +28,22 @@ int level_table[] = {
     265000,
     305000,
     355000,    // Level 20
-    500000     // Level 21 (currently unused)
+    405000,
+    455000,
+    500000,
+    550000,
+    605000,    // Level 25
+    655000,
+    705000,
+    760000,
+    815000,
+    870000,    // Level 30
+    930000,
+    1000000,
+    1060000,
+    1125000,
+    1185000,   // Level 35
+    1245000,
 };
 
 ClassData class_list[] = {
@@ -96,7 +111,6 @@ void calculateStatGrowth(int* stat, StatGrowthRate* growth_rate) {
     (*stat) += increase;
 
     if (*stat > PC_STAT_MAX) {
-        printf("Reset from max: %d\n", *stat);
         *stat = PC_STAT_MAX;
     }
 }
@@ -135,7 +149,7 @@ void printExpThresholds() {
     int length = sizeof(level_table)/sizeof(int);
     for (int i = 1; i < length - 1; i++) {
         int exp = level_table[i + 1] - level_table[i];
-        printf("EXP to get from level %d to level %d: %d\n", i, i + 1, exp);
+        printf("EXP to get from level %2d to level %2d: %7d\n", i, i + 1, exp);
     }
 }
 

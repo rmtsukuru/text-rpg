@@ -5,7 +5,7 @@
 #include "struct.h"
 #include "level.h"
 
-// #define DEBUG
+#define DEBUG
 #define MAX_NAME_LENGTH 50
 #define MAX_PARTY_SIZE 4
 
