@@ -65,6 +65,10 @@ int main() {
     class = class_list[class_index - 1].class;
     printf("\n");
 
+    printf("How many experience points (EXP) does this character have? ");
+    scanf("%d", &exp);
+    printf("\n\n");
+
     Player player = createInitialPlayer(name, class, exp, max_hp, money, location);
 
     printf("Current Location: %s\n", locations[player.location]);
