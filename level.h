@@ -3,7 +3,13 @@
 
 #include "struct.h"
 
+extern ClassData class_list[5];
+
+Attributes* getBaseAttributes(Class class);
+
 int getLevel(Adventurer* pc);
+
+void levelUp(Adventurer* pc, int currentLevel);
 
 int getTotalExpForNextLevel(Adventurer* pc);
 

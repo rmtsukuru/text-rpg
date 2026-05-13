@@ -2,11 +2,40 @@
 #define STRUCT_H
 
 typedef struct {
+    int str;
+    int dex;
+    int vit;
+    int spr;
+    int intel;
+    int awa;
+    int cha;
+    int lck;
+} Attributes;
+
+typedef enum {
+    ROGUE,
+    FIGHTER,
+    MAGE,
+    PRIESTESS,
+    MONK
+} Class;
+
+typedef struct {
+    Class class;
+    char* name;
+    Attributes base_stats;
+} ClassData;
+
+// I don't think this is needed here
+// ClassData class_list[];
+
+typedef struct {
     char* name;
     int exp;
     int hp;
     int max_hp;
-    char* class;
+    Class class;
+    Attributes attributes;
 } Adventurer;
 
 typedef struct {
