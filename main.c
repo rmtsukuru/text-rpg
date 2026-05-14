@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #include "struct.h"
@@ -45,9 +46,18 @@ void printStats(Adventurer* pc) {
     printf("Intelligence: %2d   Awareness: %2d   Charisma: %2d   Luck:   %2d\n", pc->attributes.intel, pc->attributes.awa, pc->attributes.cha, pc->attributes.lck);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     srand(time(NULL));
     char name[MAX_NAME_LENGTH];
+
+    #ifdef DEBUG
+        if (argc > 1 && strcmp(argv[1], "--debug") == 0) {
+            printf("\n");
+            printExpThresholds();
+            return 0;
+        }
+    #endif
+
     int exp = 500, max_hp = 12, money = 300, location = 0;
     printf("Okay, let's get you started!\n");
     printf("\nWhat's the name of your character? ");
@@ -78,10 +88,5 @@ int main() {
     printStats(&hero);
 
     cleanupPlayerData(&player);
-
-#ifdef DEBUG
-    printf("\n");
-    printExpThresholds();
-#endif
 }
 
