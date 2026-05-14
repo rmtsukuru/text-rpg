@@ -50,8 +50,15 @@ typedef struct {
 // I don't think this is needed here
 // ClassData class_list[];
 
+typedef enum {
+    SHE = 1,
+    HE = 2,
+    THEY = 3
+} Pronoun;
+
 typedef struct {
     char* name;
+    Pronoun pronoun;
     int exp;
     int hp;
     int max_hp;
