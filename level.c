@@ -80,7 +80,7 @@ Attributes* getBaseAttributes(Class class) {
 
 int getLevel(Adventurer* pc) {
     int level = 0;
-    while (level_table[level + 1] < pc->exp) {
+    while (level_table[level + 1] <= pc->exp) {
         level++;
     }
     return level;
