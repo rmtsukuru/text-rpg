@@ -43,6 +43,7 @@ typedef struct {
 typedef struct {
     Class class;
     char* name;
+    int base_hp;
     Attributes base_stats;
     AttributeGrowthRates stat_growth;
 } ClassData;

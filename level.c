@@ -47,19 +47,19 @@ int level_table[] = {
 };
 
 ClassData class_list[] = {
-    {MONK, "Monk", {10, 20, 13, 15, 8, 16, 11, 5},
+    {MONK, "Monk", 12, {10, 20, 13, 15, 8, 16, 11, 5},
         {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW}
     },
-    {ROGUE, "Rogue", {10, 25, 10, 8, 15, 13, 7, 13},
+    {ROGUE, "Rogue", 10, {10, 25, 10, 8, 15, 13, 7, 13},
         {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG}
     },
-    {FIGHTER, "Fighter", {20, 7, 18, 12, 4, 12, 14, 10},
+    {FIGHTER, "Fighter", 16, {20, 7, 18, 12, 4, 12, 14, 10},
         {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG}
     },
-    {PRIESTESS, "Priestess", {6, 10, 12, 24, 10, 15, 18, 20},
+    {PRIESTESS, "Priestess", 10, {6, 10, 12, 24, 10, 15, 18, 20},
         {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH}
     },
-    {MAGE, "Mage", {8, 15, 5, 16, 23, 17, 13, 12},
+    {MAGE, "Mage", 8, {8, 15, 5, 16, 23, 17, 13, 12},
         {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG}
     }
 };
@@ -71,6 +71,11 @@ ClassData* getClassData(Class class) {
             return &class_list[i];
         }
     }
+}
+
+int getBaseHp(Class class) {
+    ClassData* data = getClassData(class);
+    return data->base_hp;
 }
 
 Attributes* getBaseAttributes(Class class) {
@@ -88,8 +93,9 @@ int getLevel(Adventurer* pc) {
 
 void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
     int increase = 0;
+    int vit_bonus = pc->attributes.vit / 10;
     int max = *growth_rate;
-    increase = (rand() % max + 1);
+    increase = (rand() % max) + 1 + vit_bonus;
     pc->max_hp += increase;
     pc->hp += increase;
     if (pc->max_hp > PC_HP_MAX) {
@@ -105,8 +111,17 @@ void calculateStatGrowth(int* stat, StatGrowthRate* growth_rate) {
     // switch(*growth_rate) {
         // TODO add proper switch case logic here later
         // default:
-            int max = (int) *growth_rate;
-            increase = (rand() % max + 1);
+            int threshold = (int) *growth_rate;
+            int roll = rand() % (11);
+            if (roll < threshold) {
+                if (roll > 7) {
+                    increase = 3;
+                } else if (roll > 4) {
+                    increase = 2;
+                } else {
+                    increase = 1;
+                }
+            }
     // }
     (*stat) += increase;
 
@@ -122,7 +137,6 @@ void levelUp(Adventurer* pc, int currentLevel) {
         Attributes* stats = &pc->attributes;
         ClassData* class = getClassData(pc->class);
         AttributeGrowthRates* growth_rates = &class->stat_growth;
-        calculateHpGrowth(pc, &growth_rates->hp);
         calculateStatGrowth(&stats->str, &growth_rates->str);
         calculateStatGrowth(&stats->dex, &growth_rates->dex);
         calculateStatGrowth(&stats->vit, &growth_rates->vit);
@@ -131,6 +145,7 @@ void levelUp(Adventurer* pc, int currentLevel) {
         calculateStatGrowth(&stats->awa, &growth_rates->awa);
         calculateStatGrowth(&stats->cha, &growth_rates->cha);
         calculateStatGrowth(&stats->lck, &growth_rates->lck);
+        calculateHpGrowth(pc, &growth_rates->hp);
         currentLevel++;
     }
 }

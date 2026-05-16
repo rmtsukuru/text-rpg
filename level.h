@@ -5,6 +5,8 @@
 
 extern ClassData class_list[5];
 
+int getBaseHp(Class class);
+
 Attributes* getBaseAttributes(Class class);
 
 int getLevel(Adventurer* pc);

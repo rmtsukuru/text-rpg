@@ -42,7 +42,7 @@ Pronoun parsePronounString(char* pronoun_string) {
 
 Adventurer createNewAdventurer(Party* party) {
     char* name = malloc(sizeof(char) * MAX_NAME_LENGTH);
-    int exp = 500, max_hp = 12;
+    int exp = 500;
     Pronoun pronoun;
     printf("Okay, let's get you started!\n");
     printf("\nWhat's the name of your character? ");
@@ -73,6 +73,7 @@ Adventurer createNewAdventurer(Party* party) {
     scanf("%d", &exp);
     printf("\n");
 
+    int max_hp = getBaseHp(class);
     Attributes* stats = getBaseAttributes(class);
     Adventurer hero = {name, pronoun, exp, max_hp, max_hp, class, *stats};
     levelUp(&hero, 1);
