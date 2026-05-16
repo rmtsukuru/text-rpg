@@ -40,18 +40,59 @@ Pronoun parsePronounString(char* pronoun_string) {
     }
 }
 
-Player createInitialPlayer(char* name, Pronoun pronoun, Class class, int exp, int max_hp, int starting_money, int starting_location) {
+Adventurer createNewAdventurer(Party* party) {
+    char* name = malloc(sizeof(char) * MAX_NAME_LENGTH);
+    int exp = 500, max_hp = 12;
+    Pronoun pronoun;
+    printf("Okay, let's get you started!\n");
+    printf("\nWhat's the name of your character? ");
+    scanf("%s", name);
+    printf("\nAnd what are your character's pronouns?\n");
+    Pronoun pronoun_list[] = {SHE, HE, THEY};
+    int pronoun_count = 3;
+    for (int i = 0; i < pronoun_count; i++) {
+        printf("%s - %d\n", getStringFromPronoun(pronoun_list[i]), (int) pronoun_list[i]);
+    }
+    printf("Make your choice (enter corresponding number): ");
+    scanf("%d", &pronoun);
+    printf("\n");
+
+    Class class;
+    int class_index;
+    printf("\nWhat class is this character? Options include:\n");
+    int class_count = sizeof(class_list)/sizeof(ClassData);
+    for (int i = 0; i < class_count; i++) {
+        printf("%s - %d\n", class_list[i].name, i + 1);
+    }
+    printf("Make your choice: ");
+    scanf("%d", &class_index);
+    class = class_list[class_index - 1].class;
+    printf("\n");
+
+    printf("How many experience points (EXP) does this character have? ");
+    scanf("%d", &exp);
+    printf("\n");
+
     Attributes* stats = getBaseAttributes(class);
     Adventurer hero = {name, pronoun, exp, max_hp, max_hp, class, *stats};
-    Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
     levelUp(&hero, 1);
-    *party_members = hero;
-    Party party = {party_members, 1};
+
+    party->party_members[party->size] = hero;
+    party->size++;
+}
+
+Player createInitialPlayer(int starting_money, int starting_location) {
+    Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
+    Party party = {party_members, 0};
+    createNewAdventurer(&party);
     Player player = {party, starting_money, starting_location};
     return player;
 }
 
 void cleanupPlayerData(Player* player) {
+    for (int i = 0; i < player->party.size; i++) {
+        free(player->party.party_members[i].name);
+    }
     free(player->party.party_members);
     player->party.party_members = NULL;
 }
@@ -82,46 +123,30 @@ int main(int argc, char* argv[]) {
         }
     #endif
 
-    char name[MAX_NAME_LENGTH];
-    int exp = 500, max_hp = 12, money = 300, location = 0;
-    Pronoun pronoun;
-    printf("Okay, let's get you started!\n");
-    printf("\nWhat's the name of your character? ");
-    scanf("%s", name);
-    printf("\nAnd what are your character's pronouns?\n");
-    Pronoun pronoun_list[] = {SHE, HE, THEY};
-    int pronoun_count = 3;
-    for (int i = 0; i < pronoun_count; i++) {
-        printf("%s - %d\n", getStringFromPronoun(pronoun_list[i]), (int) pronoun_list[i]);
+    int money = 300, location = 0;
+
+    Player player = createInitialPlayer(money, location);
+
+    int add_more_pcs = 1;
+
+    while (player.party.size < MAX_PARTY_SIZE && add_more_pcs) {
+        printf("Add another character (Y/n)? ");
+        char response;
+        scanf(" %c", &response);
+        if (response == 'Y' || response == 'y') {
+            createNewAdventurer(&player.party);
+        } else {
+            add_more_pcs = 0;
+        }
     }
-    printf("Make your choice (enter corresponding number): ");
-    scanf("%d", &pronoun);
+
     printf("\n");
-
-    Class class;
-    int class_index;
-    printf("\nWhat class is this character? Options include:\n");
-    int class_count = sizeof(class_list)/sizeof(ClassData);
-    for (int i = 0; i < class_count; i++) {
-        printf("%s - %d\n", class_list[i].name, i + 1);
-    }
-    printf("Make your choice: ");
-    scanf("%d", &class_index);
-    class = class_list[class_index - 1].class;
-    printf("\n");
-
-    printf("How many experience points (EXP) does this character have? ");
-    scanf("%d", &exp);
-    printf("\n\n");
-
-    Player player = createInitialPlayer(name, pronoun, class, exp, max_hp, money, location);
-
     printf("Current Location: %s\n", locations[player.location]);
     printf("Current Money: $%d\n", player.money);
-    Adventurer hero = player.party.party_members[0];
     printf("Party:\n");
-    printStats(&hero);
-
+    for (int i = 0; i < player.party.size; i++) {
+        printStats(&player.party.party_members[i]);
+    }
     cleanupPlayerData(&player);
 }
 

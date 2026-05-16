@@ -68,7 +68,7 @@ typedef struct {
 
 typedef struct {
     Adventurer* party_members;
-    int party_size;
+    int size;
 } Party;
 
 typedef struct {
