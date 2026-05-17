@@ -40,7 +40,7 @@ Pronoun parsePronounString(char* pronoun_string) {
     }
 }
 
-Adventurer createNewAdventurer(Party* party) {
+void createNewAdventurer(Party* party) {
     char* name = malloc(sizeof(char) * MAX_NAME_LENGTH);
     int exp = 500;
     Pronoun pronoun;
@@ -82,6 +82,22 @@ Adventurer createNewAdventurer(Party* party) {
     party->size++;
 }
 
+void createParty(Party* party) {
+    int add_more_pcs = 1;
+
+    while (party->size < MAX_PARTY_SIZE && add_more_pcs) {
+        printf("Add another character (Y/n)? ");
+        char response;
+        scanf(" %c", &response);
+        if (response == 'Y' || response == 'y') {
+            createNewAdventurer(party);
+        } else {
+            add_more_pcs = 0;
+        }
+    }
+    printf("\n");
+}
+
 Player createInitialPlayer(int starting_money, int starting_location) {
     Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
     Party party = {party_members, 0};
@@ -114,6 +130,18 @@ void printStats(Adventurer* pc) {
     printf("Intelligence: %2d   Awareness: %2d   Charisma: %2d   Luck:   %2d\n", pc->attributes.intel, pc->attributes.awa, pc->attributes.cha, pc->attributes.lck);
 }
 
+void printPlayerInfo(Player* player) {
+    printf("Current Location: %s\n", locations[player->location]);
+    printf("Current Money: $%d\n", player->money);
+    printf("Party:\n");
+    for (int i = 0; i < player->party.size; i++) {
+        printStats(&player->party.party_members[i]);
+        if (i < player->party.size - 1) {
+            printf("\n");
+        }
+    }
+}
+
 int main(int argc, char* argv[]) {
     srand(time(NULL));
     #ifdef DEBUG
@@ -127,27 +155,9 @@ int main(int argc, char* argv[]) {
     int money = 300, location = 0;
 
     Player player = createInitialPlayer(money, location);
+    createParty(&player.party);
 
-    int add_more_pcs = 1;
-
-    while (player.party.size < MAX_PARTY_SIZE && add_more_pcs) {
-        printf("Add another character (Y/n)? ");
-        char response;
-        scanf(" %c", &response);
-        if (response == 'Y' || response == 'y') {
-            createNewAdventurer(&player.party);
-        } else {
-            add_more_pcs = 0;
-        }
-    }
-
-    printf("\n");
-    printf("Current Location: %s\n", locations[player.location]);
-    printf("Current Money: $%d\n", player.money);
-    printf("Party:\n");
-    for (int i = 0; i < player.party.size; i++) {
-        printStats(&player.party.party_members[i]);
-    }
+    printPlayerInfo(&player);
     cleanupPlayerData(&player);
 }
 
