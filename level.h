@@ -1,7 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "struct.h"
+#include "struct/class.h"
+#include "player.h"
 
 extern ClassData class_list[5];
 
@@ -20,3 +21,4 @@ int getRemaingExpForNextLevel(Adventurer* pc);
 void printExpThresholds();
 
 #endif
+

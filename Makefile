@@ -1,2 +1,2 @@
 rpgmake: main.c level.c
-	gcc main.c level.c -o text_rpg.exe
+	gcc main.c level.c player.c -o text_rpg.exe
