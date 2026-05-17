@@ -44,7 +44,6 @@ void createNewAdventurer(Party* party) {
     char* name = malloc(sizeof(char) * MAX_NAME_LENGTH);
     int exp = 500;
     Pronoun pronoun;
-    printf("Okay, let's get you started!\n");
     printf("\nWhat's the name of your character? ");
     scanf("%s", name);
     printf("\nAnd what are your character's pronouns?\n");
@@ -101,6 +100,7 @@ void createParty(Party* party) {
 Player createInitialPlayer(int starting_money, int starting_location) {
     Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
     Party party = {party_members, 0};
+    printf("Okay, let's get you started!\n");
     createNewAdventurer(&party);
     Player player = {party, starting_money, starting_location};
     return player;
