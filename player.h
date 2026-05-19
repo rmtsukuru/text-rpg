@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "struct/player.h"
+#include "struct.h"
 #include "level.h"
 
 #define MAX_NAME_LENGTH 50
