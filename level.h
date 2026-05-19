@@ -12,7 +12,7 @@ Attributes* getBaseAttributes(Class class);
 
 int getLevel(Adventurer* pc);
 
-void levelUp(Adventurer* pc, int currentLevel);
+void levelUp(Adventurer* pc, byte currentLevel);
 
 int getTotalExpForNextLevel(Adventurer* pc);
 

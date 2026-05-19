@@ -3,8 +3,9 @@
 
 #include "level.h"
 
-const int PC_HP_MAX = 500;
+const ushort PC_HP_MAX = 500;
 const byte PC_STAT_MAX = 100;
+const byte LEVEL_MAX = 100;
 
 int level_table[] = {
     -10000,    // Level 0 (mostly unused)
@@ -154,7 +155,7 @@ void calculateStatGrowth(byte* stat, StatGrowthRate* growth_rate) {
     }
 }
 
-void levelUp(Adventurer* pc, int currentLevel) {
+void levelUp(Adventurer* pc, byte currentLevel) {
     int newLevel = getLevel(pc);
     while (currentLevel < newLevel) {
         // Just get stat boosts for each level for now
