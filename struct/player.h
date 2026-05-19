@@ -1,6 +1,8 @@
 #ifndef PLAYER_TYPES_H
 #define PLAYER_TYPES_H
 
+#include "math.h"
+
 typedef enum {
     SHE = 1,
     HE = 2,
@@ -16,14 +18,14 @@ typedef enum {
 } Class;
 
 typedef struct {
-    int str;
-    int dex;
-    int vit;
-    int spr;
-    int intel;
-    int awa;
-    int cha;
-    int lck;
+    byte str;
+    byte dex;
+    byte vit;
+    byte spr;
+    byte intel;
+    byte awa;
+    byte cha;
+    byte lck;
 } Attributes;
 
 typedef struct {

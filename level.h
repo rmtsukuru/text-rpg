@@ -1,7 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "struct.h"
+#include "types.h"
 #include "player.h"
 
 extern ClassData class_list[5];

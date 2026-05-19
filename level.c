@@ -4,7 +4,7 @@
 #include "level.h"
 
 const int PC_HP_MAX = 500;
-const int PC_STAT_MAX = 100;
+const byte PC_STAT_MAX = 100;
 
 int level_table[] = {
     -10000,    // Level 0 (mostly unused)
@@ -130,8 +130,8 @@ void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
     }
 }
 
-void calculateStatGrowth(int* stat, StatGrowthRate* growth_rate) {
-    int increase = 0;
+void calculateStatGrowth(byte* stat, StatGrowthRate* growth_rate) {
+    byte increase = 0;
     // switch(*growth_rate) {
         // TODO add proper switch case logic here later
         // default:
