@@ -2,6 +2,7 @@
 #define PLAYER_TYPES_H
 
 #include "math.h"
+#include "skill.h"
 
 typedef enum {
     SHE = 1,
@@ -32,10 +33,12 @@ typedef struct {
     char* name;
     Pronoun pronoun;
     int exp;
-    int hp;
-    int max_hp;
-    Class class;
+    sint hp;
+    sint max_hp;
     Attributes attributes;
+    Class class;
+    Background background;
+    Skills skills;
 } Adventurer;
 
 typedef struct {
@@ -46,7 +49,7 @@ typedef struct {
 typedef struct {
     Party party;
     int money;
-    int location;
+    ushort location;
 } Player;
 
 #endif

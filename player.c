@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "skill.h"
 #include "player.h"
 
 char* getStringFromPronoun(Pronoun pronoun) {
@@ -63,7 +64,18 @@ void createNewAdventurer(Party* party) {
 
     int max_hp = getBaseHp(class);
     Attributes* stats = getBaseAttributes(class);
-    Adventurer hero = {name, pronoun, exp, max_hp, max_hp, class, *stats};
+    Background bg = NOBLE; // TODO fix this later, actually ask for background
+    if (class == FIGHTER) {
+        bg = SOLDIER;
+    }
+    Skills* base_skills = getBaseSkills(bg);
+    byte length = base_skills->length;
+    Skills* skills = &(Skills){length, malloc(sizeof(SkillRank) * length)};
+    for (int i = 0; i < length; i++) {
+        skills->ranks[i].id = base_skills->ranks[i].id;
+        skills->ranks[i].rank = base_skills->ranks[i].rank;
+    }
+    Adventurer hero = {name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills};
     levelUp(&hero, 1);
 
     party->party_members[party->size] = hero;
@@ -97,7 +109,9 @@ Player createInitialPlayer(int starting_money, int starting_location) {
 
 void cleanupPlayerData(Player* player) {
     for (int i = 0; i < player->party.size; i++) {
-        free(player->party.party_members[i].name);
+        Adventurer pc = player->party.party_members[i];
+        free(pc.name);
+        free(pc.skills.ranks);
     }
     free(player->party.party_members);
     player->party.party_members = NULL;
