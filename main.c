@@ -3,9 +3,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "player.h"
-#include "level.h"
-#include "skill.h"
+#include "types.h"
+#include "functions.h"
 
 #define DEBUG
 
