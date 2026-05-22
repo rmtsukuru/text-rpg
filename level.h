@@ -16,7 +16,7 @@ void levelUp(Adventurer* pc, byte currentLevel);
 
 int getTotalExpForNextLevel(Adventurer* pc);
 
-int getRemaingExpForNextLevel(Adventurer* pc);
+int getRemainingExpForNextLevel(Adventurer* pc);
 
 void printExpThresholds();
 

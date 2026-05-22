@@ -180,7 +180,7 @@ int getTotalExpForNextLevel(Adventurer* pc) {
     return level_table[level + 1];
 }
 
-int getRemaingExpForNextLevel(Adventurer* pc) {
+int getRemainingExpForNextLevel(Adventurer* pc) {
     int total = getTotalExpForNextLevel(pc);
     return total - pc->exp;
 }
