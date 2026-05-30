@@ -57,7 +57,6 @@ int main(int argc, char* argv[]) {
     int money = 300, location = 0;
 
     Player player = createInitialPlayer(money, location);
-    createParty(&player.party);
 
     printPlayerInfo(&player);
     cleanupPlayerData(&player);

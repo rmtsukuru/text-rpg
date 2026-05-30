@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "menu.h"
 #include "skill.h"
 #include "player.h"
 
@@ -33,30 +34,25 @@ Pronoun parsePronounString(char* pronoun_string) {
 void createNewAdventurer(Party* party) {
     char* name = malloc(sizeof(char) * MAX_NAME_LENGTH);
     int exp = 500;
-    Pronoun pronoun;
     printf("\nWhat's the name of your character? ");
     scanf("%s", name);
-    printf("\nAnd what are your character's pronouns?\n");
     Pronoun pronoun_list[] = {SHE, HE, THEY};
-    int pronoun_count = 3;
-    for (int i = 0; i < pronoun_count; i++) {
-        printf("%s - %d\n", getStringFromPronoun(pronoun_list[i]), (int) pronoun_list[i]);
+    const byte pronoun_count = 3;
+    char* pronoun_choices[pronoun_count];
+    for (byte i = 0; i < pronoun_count; i++) {
+        pronoun_choices[i] = getStringFromPronoun(pronoun_list[i]);
     }
-    printf("Make your choice (enter corresponding number): ");
-    scanf("%d", &pronoun);
-    printf("\n");
+    byte selection = listMenuPrompt("And what are your character's pronouns?", pronoun_choices, pronoun_count);
+    Pronoun pronoun = pronoun_list[selection];
 
     Class class;
-    int class_index;
-    printf("\nWhat class is this character? Options include:\n");
     int class_count = sizeof(class_list)/sizeof(ClassData);
+    char* class_options[class_count];
     for (int i = 0; i < class_count; i++) {
-        printf("%s - %d\n", class_list[i].name, i + 1);
+        class_options[i] = class_list[i].name;
     }
-    printf("Make your choice: ");
-    scanf("%d", &class_index);
-    class = class_list[class_index - 1].class;
-    printf("\n");
+    byte class_index = listMenuPrompt("What class is this character? Options include:", class_options, class_count);
+    class = class_list[class_index].class;
 
     printf("How many experience points (EXP) does this character have? ");
     scanf("%d", &exp);
@@ -108,6 +104,9 @@ void createNewAdventurer(Party* party) {
 }
 
 void createParty(Party* party) {
+    printf("Okay, let's get you started!\n");
+    createNewAdventurer(party);
+
     int add_more_pcs = 1;
 
     while (party->size < MAX_PARTY_SIZE && add_more_pcs) {
@@ -126,8 +125,7 @@ void createParty(Party* party) {
 Player createInitialPlayer(int starting_money, int starting_location) {
     Adventurer* party_members = malloc(sizeof(Adventurer) * MAX_PARTY_SIZE);
     Party party = {party_members, 0};
-    printf("Okay, let's get you started!\n");
-    createNewAdventurer(&party);
+    createParty(&party);
     Player player = {party, starting_money, starting_location};
     return player;
 }
