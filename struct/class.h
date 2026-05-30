@@ -26,9 +26,10 @@ typedef struct {
 typedef struct {
     Class class;
     char* name;
-    sint base_hp;
+    ushort base_hp;
     Attributes base_stats;
     AttributeGrowthRates stat_growth;
+    Skills base_skills;
 } ClassData;
 
 #endif

@@ -68,12 +68,21 @@ void createNewAdventurer(Party* party) {
     if (class == FIGHTER) {
         bg = SOLDIER;
     }
-    Skills* base_skills = getBaseSkills(bg);
+    Skills* base_skills = getClassSkills(class);
     byte length = base_skills->length;
-    Skills* skills = &(Skills){length, malloc(sizeof(SkillRank) * length)};
+    Skills* bg_base_skills = getBaseSkills(bg);
+    byte bg_length = bg_base_skills->length;
+    byte total_length = length + bg_length;
+
+    Skills* skills = &(Skills){total_length, malloc(sizeof(SkillRank) * total_length)};
     for (int i = 0; i < length; i++) {
         skills->ranks[i].id = base_skills->ranks[i].id;
         skills->ranks[i].rank = base_skills->ranks[i].rank;
+    }
+    // TODO fix this to handle duplicate skills from class and background properly
+    for (int i = 0; i < bg_length; i++) {
+        skills->ranks[i + length].id = bg_base_skills->ranks[i].id;
+        skills->ranks[i + length].rank = bg_base_skills->ranks[i].rank;
     }
     Adventurer hero = {name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills};
     levelUp(&hero, 1);

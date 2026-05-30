@@ -3,12 +3,15 @@
 
 #include "types.h"
 #include "player.h"
+#include "skill.h"
 
 extern ClassData class_list[5];
 
 int getBaseHp(Class class);
 
 Attributes* getBaseAttributes(Class class);
+
+Skills* getClassSkills(Class class);
 
 int getLevel(Adventurer* pc);
 

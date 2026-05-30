@@ -16,7 +16,13 @@ typedef enum {
 
 typedef enum {
     BRAWL,              // STR
+    AXES,
+    POLEARMS,
+    GREATSWORDS,
+    ARMOR,
+    HEAVY_ARMOR,
     GRAPPLING,
+    SWIMMING,
     FENCING,
     ARCHERY,            // DEX
     ACROBATICS,
@@ -26,6 +32,7 @@ typedef enum {
     CRAFTS,
     WELLNESS,           // VIT
     ENDURANCE,
+    BEAUTY,
     INSIGHT,            // SPR
     ATTUNEMENT,
     MEDICINE,

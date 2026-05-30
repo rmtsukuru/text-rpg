@@ -71,15 +71,20 @@ int level_table[] = {
     3305000,   // Level 60
 };
 
+// TODO fill in remaining class skill ranks
+// (and also proper class list later)
 ClassData class_list[] = {
     {MONK, "Monk", 12, {10, 20, 13, 15, 8, 16, 11, 5},
-        {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW}
+        {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW},
+        {2, (SkillRank[2]){{BRAWL, 80},{FENCING, 30}}}
     },
     {ROGUE, "Rogue", 10, {10, 25, 10, 8, 15, 13, 7, 13},
-        {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG}
+        {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG},
+        {2, (SkillRank[2]){{STEALTH, 60},{FENCING, 70}}}
     },
     {FIGHTER, "Fighter", 16, {20, 7, 18, 12, 4, 12, 14, 10},
-        {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG}
+        {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG},
+        {2, (SkillRank[2]){{BRAWL, 50},{FENCING, 10}}}
     },
     {PRIESTESS, "Priestess", 10, {6, 10, 12, 24, 10, 15, 18, 20},
         {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH}
@@ -106,6 +111,11 @@ int getBaseHp(Class class) {
 Attributes* getBaseAttributes(Class class) {
     ClassData* data = getClassData(class);
     return &data->base_stats;
+}
+
+Skills* getClassSkills(Class class) {
+    ClassData* data = getClassData(class);
+    return &data->base_skills;
 }
 
 int getLevel(Adventurer* pc) {
