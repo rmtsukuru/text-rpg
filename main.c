@@ -21,7 +21,7 @@ void printStats(Adventurer* pc) {
     printf("Intelligence: %2d   Awareness: %2d   Charisma: %2d   Luck:   %2d\n", pc->attributes.intel, pc->attributes.awa, pc->attributes.cha, pc->attributes.lck);
     printf("Skills: ");
     for (int i = 0; i < pc->skills.length; i++) {
-        if (i > 0 && i % 3 == 0) {
+        if (i > 0 && i % 4 == 0) {
             printf("\n");
         }
         Skill skill_id = pc->skills.ranks[i].id;
