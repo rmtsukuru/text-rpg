@@ -128,6 +128,14 @@ int getLevel(Adventurer* pc) {
     return level;
 }
 
+void calculateSkillPoints(Adventurer* pc) {
+    byte increase = 0;
+    // Minimum int bonus of 1 to prevent dividing by 0
+    byte int_bonus = pc->attributes.intel / 5 + 1;
+    increase = (rand() % int_bonus) + 1;
+    pc->skill_points += increase;
+}
+
 void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
     int increase = 0;
     int vit_bonus = pc->attributes.vit / 10;
@@ -183,6 +191,7 @@ void levelUp(Adventurer* pc, byte currentLevel) {
         calculateStatGrowth(&stats->cha, &growth_rates->cha);
         calculateStatGrowth(&stats->lck, &growth_rates->lck);
         calculateHpGrowth(pc, &growth_rates->hp);
+        calculateSkillPoints(pc);
         currentLevel++;
     }
 }

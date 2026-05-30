@@ -30,6 +30,7 @@ void printStats(Adventurer* pc) {
         printf("%s: %2d  ", skill->name, rank);
     }
     printf("\n");
+    printf("Skill Points: %d\n", pc->skill_points);
 }
 
 void printPlayerInfo(Player* player) {

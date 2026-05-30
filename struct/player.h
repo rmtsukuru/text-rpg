@@ -39,6 +39,7 @@ typedef struct {
     Class class;
     Background background;
     Skills skills;
+    byte skill_points;
 } Adventurer;
 
 typedef struct {

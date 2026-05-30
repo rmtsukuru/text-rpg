@@ -96,10 +96,13 @@ void createNewAdventurer(Party* party) {
         }
     }
     skills->length = total_length;
+    byte skill_points = 0;
 
     int max_hp = getBaseHp(class);
     Attributes* stats = getBaseAttributes(class);
-    Adventurer hero = {name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills};
+    Adventurer hero = {
+        name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills, skill_points
+    };
     levelUp(&hero, 1);
 
     party->party_members[party->size] = hero;
