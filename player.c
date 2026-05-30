@@ -56,14 +56,14 @@ void createNewAdventurer(Party* party) {
 
     printf("How many experience points (EXP) does this character have? ");
     scanf("%d", &exp);
-    printf("\n");
 
-    int max_hp = getBaseHp(class);
-    Attributes* stats = getBaseAttributes(class);
-    Background bg = NOBLE; // TODO fix this later, actually ask for background
-    if (class == FIGHTER) {
-        bg = SOLDIER;
-    }
+    Background bg;
+    byte background_count = getBackgroundCount();
+    char** background_options = getBackgroundOptions();
+    byte background_index = listMenuPrompt("What is this character's background?", background_options, background_count);
+    bg = (Background) background_index;
+    cleanupBackgroundOptions(background_options);
+
     Skills* base_skills = getClassSkills(class);
     byte length = base_skills->length;
     Skills* bg_base_skills = getBaseSkills(bg);
@@ -96,6 +96,9 @@ void createNewAdventurer(Party* party) {
         }
     }
     skills->length = total_length;
+
+    int max_hp = getBaseHp(class);
+    Attributes* stats = getBaseAttributes(class);
     Adventurer hero = {name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills};
     levelUp(&hero, 1);
 

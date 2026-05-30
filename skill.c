@@ -1,3 +1,4 @@
+#include <stdlib.h>
 
 #include "skill.h"
 
@@ -52,7 +53,15 @@ BackgroundData backgrounds[] = {
     {NOBLE, "Noble",
         {2, (SkillRank[2]){{FENCING, 40}, {STEALTH, 30}}}
     },
-    // TODO fill in the rest of these too
+    {SCHOLAR, "Scholar",
+        {1, (SkillRank[1]){{EDUCATION, 60}}}
+    },
+    {URCHIN, "Urchin",
+        {2, (SkillRank[2]){{STEALTH, 50}, {BRAWL, 60}}}
+    },
+    {MERCHANT, "Merchant",
+        {2, (SkillRank[2]){{EDUCATION, 40}, {PERSUASION, 50}}}
+    }
 };
 
 SkillData* getSkillData(Skill skill) {
@@ -63,6 +72,30 @@ SkillData* getSkillData(Skill skill) {
 BackgroundData* getBackgroundData(Background background) {
     byte index = (byte) background;
     return &backgrounds[index];
+}
+
+byte getBackgroundCount() {
+    return sizeof(backgrounds) / sizeof(BackgroundData);
+}
+
+char** getBackgroundOptions() {
+    byte max_name_length = 30;
+    byte background_count = getBackgroundCount();
+    int block_size = sizeof(char) * max_name_length * background_count;
+    char** background_options = malloc(sizeof(char*) * background_count);
+    for (int i = 0; i < background_count; i++) {
+        background_options[i] = malloc(sizeof(char) * max_name_length);
+        background_options[i] = backgrounds[i].name;
+    }
+    return background_options;
+}
+
+void cleanupBackgroundOptions(char** options) {
+    byte background_count = getBackgroundCount();
+    for (int i = 0; i < background_count; i++) {
+        free(options[i]);
+    }
+    free(options);
 }
 
 Skills* getBaseSkills(Background background) {

@@ -7,6 +7,12 @@ Skills* getBaseSkills(Background background);
 
 BackgroundData* getBackgroundData(Background background);
 
+byte getBackgroundCount();
+
+char** getBackgroundOptions();
+
+void cleanupBackgroundOptions(char** options);
+
 SkillData* getSkillData(Skill skill);
 
 #endif
