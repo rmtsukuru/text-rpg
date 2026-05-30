@@ -79,11 +79,25 @@ void createNewAdventurer(Party* party) {
         skills->ranks[i].id = base_skills->ranks[i].id;
         skills->ranks[i].rank = base_skills->ranks[i].rank;
     }
-    // TODO fix this to handle duplicate skills from class and background properly
     for (int i = 0; i < bg_length; i++) {
-        skills->ranks[i + length].id = bg_base_skills->ranks[i].id;
-        skills->ranks[i + length].rank = bg_base_skills->ranks[i].rank;
+        byte skip = 0;
+        for (int j = 0; j < length; j++) {
+            // If class and background both provide ranks in the same skill,
+            // use the higher of the two.
+            if (skills->ranks[j].id == bg_base_skills->ranks[i].id) {
+                skip = 1;
+                total_length--;
+                if (bg_base_skills->ranks[i].rank > skills->ranks[j].rank) {
+                    skills->ranks[j].rank = bg_base_skills->ranks[i].rank;
+                }
+            }
+        }
+        if (!skip) {
+            skills->ranks[i + length].id = bg_base_skills->ranks[i].id;
+            skills->ranks[i + length].rank = bg_base_skills->ranks[i].rank;
+        }
     }
+    skills->length = total_length;
     Adventurer hero = {name, pronoun, exp, max_hp, max_hp, *stats, class, bg, *skills};
     levelUp(&hero, 1);
 

@@ -76,21 +76,23 @@ int level_table[] = {
 ClassData class_list[] = {
     {MONK, "Monk", 12, {10, 20, 13, 15, 8, 16, 11, 5},
         {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW},
-        {2, (SkillRank[2]){{BRAWL, 80},{FENCING, 30}}}
+        {3, (SkillRank[3]){{BRAWL, 50}, {FENCING, 30}, {FORTUNE, 20}}}
     },
     {ROGUE, "Rogue", 10, {10, 25, 10, 8, 15, 13, 7, 13},
         {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG},
-        {2, (SkillRank[2]){{STEALTH, 60},{FENCING, 70}}}
+        {2, (SkillRank[2]){{STEALTH, 60}, {FENCING, 50}}}
     },
     {FIGHTER, "Fighter", 16, {20, 7, 18, 12, 4, 12, 14, 10},
         {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG},
-        {2, (SkillRank[2]){{BRAWL, 50},{FENCING, 10}}}
+        {2, (SkillRank[2]){{BRAWL, 60}, {FENCING, 30}}}
     },
     {PRIESTESS, "Priestess", 10, {6, 10, 12, 24, 10, 15, 18, 20},
-        {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH}
+        {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH},
+        {2, (SkillRank[2]){{ATTUNEMENT, 40}, {INSIGHT, 30}}}
     },
     {MAGE, "Mage", 8, {8, 15, 5, 16, 23, 17, 13, 12},
-        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG}
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
     }
 };
 
