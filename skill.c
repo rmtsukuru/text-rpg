@@ -47,7 +47,7 @@ SkillData skills[] = {
 // (The skill ranks can be in any order though, they're fine as is).
 BackgroundData backgrounds[] = {
     {SOLDIER, "Soldier",
-        {1, (SkillRank[1]){{BRAWL, 60}}}
+        {2, (SkillRank[2]){{BRAWL, 60}, {ARCHERY, 40}}}
     },
     {NOBLE, "Noble",
         {2, (SkillRank[2]){{FENCING, 40}, {STEALTH, 30}}}

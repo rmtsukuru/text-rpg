@@ -79,6 +79,7 @@ void createNewAdventurer(Party* party) {
         skills->ranks[i].id = base_skills->ranks[i].id;
         skills->ranks[i].rank = base_skills->ranks[i].rank;
     }
+    byte total_counter = length;
     for (int i = 0; i < bg_length; i++) {
         byte skip = 0;
         for (int j = 0; j < length; j++) {
@@ -93,8 +94,9 @@ void createNewAdventurer(Party* party) {
             }
         }
         if (!skip) {
-            skills->ranks[i + length].id = bg_base_skills->ranks[i].id;
-            skills->ranks[i + length].rank = bg_base_skills->ranks[i].rank;
+            skills->ranks[total_counter].id = bg_base_skills->ranks[i].id;
+            skills->ranks[total_counter].rank = bg_base_skills->ranks[i].rank;
+            total_counter++;
         }
     }
     skills->length = total_length;

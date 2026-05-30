@@ -84,7 +84,7 @@ ClassData class_list[] = {
     },
     {FIGHTER, "Fighter", 16, {20, 7, 18, 12, 4, 12, 14, 10},
         {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG},
-        {2, (SkillRank[2]){{BRAWL, 60}, {FENCING, 30}}}
+        {3, (SkillRank[3]){{BRAWL, 60}, {ARCHERY, 30}, {FENCING, 30}}}
     },
     {PRIESTESS, "Priestess", 10, {6, 10, 12, 24, 10, 15, 18, 20},
         {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH},
