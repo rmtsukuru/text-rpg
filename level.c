@@ -128,15 +128,17 @@ int getLevel(Adventurer* pc) {
     return level;
 }
 
-void calculateSkillPoints(Adventurer* pc) {
+byte calculateSkillPoints(Adventurer* pc) {
     byte increase = 0;
-    // Minimum int bonus of 1 to prevent dividing by 0
+    // Minimum int (and lck) bonus of 1 to prevent dividing by 0
     byte int_bonus = pc->attributes.intel / 5 + 1;
-    increase = (rand() % int_bonus) + 1;
+    byte lck_bonus = pc->attributes.lck / 5 + 1;
+    increase = (rand() % int_bonus + rand() % lck_bonus) + 1;
     pc->skill_points += increase;
+    return increase;
 }
 
-void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
+int calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
     int increase = 0;
     int vit_bonus = pc->attributes.vit / 10;
     int max = *growth_rate;
@@ -149,9 +151,10 @@ void calculateHpGrowth(Adventurer* pc, StatGrowthRate* growth_rate) {
     if (pc->hp > PC_HP_MAX) {
         pc->hp = PC_HP_MAX;
     }
+    return increase;
 }
 
-void calculateStatGrowth(byte* stat, StatGrowthRate* growth_rate) {
+byte calculateStatGrowth(byte* stat, StatGrowthRate* growth_rate) {
     byte increase = 0;
     // switch(*growth_rate) {
         // TODO add proper switch case logic here later
@@ -173,6 +176,7 @@ void calculateStatGrowth(byte* stat, StatGrowthRate* growth_rate) {
     if (*stat > PC_STAT_MAX) {
         *stat = PC_STAT_MAX;
     }
+    return increase;
 }
 
 void levelUp(Adventurer* pc, byte currentLevel) {
