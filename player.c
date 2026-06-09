@@ -71,31 +71,7 @@ void createNewAdventurer(Party* party) {
     byte total_length = length + bg_length;
 
     Skills* skills = &(Skills){total_length, malloc(sizeof(SkillRank) * total_length)};
-    for (int i = 0; i < length; i++) {
-        skills->ranks[i].id = base_skills->ranks[i].id;
-        skills->ranks[i].rank = base_skills->ranks[i].rank;
-    }
-    byte total_counter = length;
-    for (int i = 0; i < bg_length; i++) {
-        byte skip = 0;
-        for (int j = 0; j < length; j++) {
-            // If class and background both provide ranks in the same skill,
-            // use the higher of the two.
-            if (skills->ranks[j].id == bg_base_skills->ranks[i].id) {
-                skip = 1;
-                total_length--;
-                if (bg_base_skills->ranks[i].rank > skills->ranks[j].rank) {
-                    skills->ranks[j].rank = bg_base_skills->ranks[i].rank;
-                }
-            }
-        }
-        if (!skip) {
-            skills->ranks[total_counter].id = bg_base_skills->ranks[i].id;
-            skills->ranks[total_counter].rank = bg_base_skills->ranks[i].rank;
-            total_counter++;
-        }
-    }
-    skills->length = total_length;
+    combineBaseSkills(skills, base_skills, bg_base_skills);
     byte skill_points = 0;
 
     int max_hp = getBaseHp(class);

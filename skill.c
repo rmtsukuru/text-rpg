@@ -103,3 +103,34 @@ Skills* getBaseSkills(Background background) {
     return &data->base_skills;
 }
 
+void combineBaseSkills(Skills* skills, Skills* class_skills, Skills* bg_skills) {
+    byte length = class_skills->length;
+    byte bg_length = bg_skills->length;
+    byte total_length = length + bg_length;
+    for (int i = 0; i < length; i++) {
+        skills->ranks[i].id = class_skills->ranks[i].id;
+        skills->ranks[i].rank = class_skills->ranks[i].rank;
+    }
+    byte total_counter = length;
+    for (int i = 0; i < bg_length; i++) {
+        byte skip = 0;
+        for (int j = 0; j < length; j++) {
+            // If class and background both provide ranks in the same skill,
+            // use the higher of the two.
+            if (skills->ranks[j].id == bg_skills->ranks[i].id) {
+                skip = 1;
+                total_length--;
+                if (bg_skills->ranks[i].rank > skills->ranks[j].rank) {
+                    skills->ranks[j].rank = bg_skills->ranks[i].rank;
+                }
+            }
+        }
+        if (!skip) {
+            skills->ranks[total_counter].id = bg_skills->ranks[i].id;
+            skills->ranks[total_counter].rank = bg_skills->ranks[i].rank;
+            total_counter++;
+        }
+    }
+    skills->length = total_length;
+}
+
