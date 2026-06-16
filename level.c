@@ -71,28 +71,80 @@ int level_table[] = {
     3305000,   // Level 60
 };
 
-// TODO fill in remaining class skill ranks
-// (and also proper class list later)
+// TODO fill in remaining class skill ranks and fix stats
+// (now that all EIGHTEEN classes have been added lol)
 ClassData class_list[] = {
-    {MONK, "Monk", 12, {10, 20, 13, 15, 8, 16, 11, 5},
-        {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW},
-        {3, (SkillRank[3]){{BRAWL, 50}, {FENCING, 30}, {FORTUNE, 20}}}
-    },
     {ROGUE, "Rogue", 10, {10, 25, 10, 8, 15, 13, 7, 13},
         {AVG, AVG, XHIGH, AVG, LOW, HIGH, HIGH, LOW, AVG},
         {2, (SkillRank[2]){{STEALTH, 60}, {FENCING, 50}}}
     },
-    {FIGHTER, "Fighter", 16, {20, 7, 18, 12, 4, 12, 14, 10},
+    {NOMAD, "Nomad", 16, {20, 7, 18, 12, 4, 12, 14, 10},
         {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG},
-        {3, (SkillRank[3]){{BRAWL, 60}, {ARCHERY, 30}, {FENCING, 30}}}
+        {3, (SkillRank[3]){{BRAWL, 30}, {ARCHERY, 60}, {FENCING, 40}}}
+    },
+    {KNIGHT, "Knight", 16, {20, 7, 18, 12, 4, 12, 14, 10},
+        {XHIGH, HIGH, AVG, HIGH, AVG, LOW, AVG, AVG, AVG},
+        {2, (SkillRank[2]){{BRAWL, 60}, {FENCING, 30}}}
+    },
+    {SCOUT, "Scout", 14, {10, 25, 10, 8, 15, 13, 7, 13},
+        {AVG, AVG, HIGH, AVG, AVG, HIGH, HIGH, LOW, AVG},
+        {2, (SkillRank[2]){{STEALTH, 50}, {TRACKING, 60}}}
+    },
+    {MONK, "Monk", 12, {10, 20, 13, 15, 8, 16, 11, 5},
+        {AVG, HIGH, HIGH, AVG, HIGH, LOW, XHIGH, AVG, XLOW},
+        {3, (SkillRank[3]){{BRAWL, 50}, {FENCING, 30}, {FORTUNE, 20}}}
+    },
+    {BARD, "Bard", 10, {6, 10, 12, 24, 10, 15, 18, 20},
+        {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH},
+        {2, (SkillRank[2]){{ATTUNEMENT, 40}, {PERFORMANCE, 50}}}
+    },
+    {WARLOCK, "Warlock", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {ORACLE, "Oracle", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
     },
     {PRIESTESS, "Priestess", 10, {6, 10, 12, 24, 10, 15, 18, 20},
         {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH},
         {2, (SkillRank[2]){{ATTUNEMENT, 40}, {INSIGHT, 30}}}
     },
-    {MAGE, "Mage", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+    {WITCH, "Witch", 12, {8, 15, 5, 16, 23, 17, 13, 12},
+        {LOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {SHAMAN, "Shaman", 10, {10, 15, 7, 16, 23, 17, 13, 12},
+        {AVG, LOW, LOW, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {SORCERER, "Sorcerer", 8, {8, 15, 5, 16, 23, 17, 13, 12},
         {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
         {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {OCCULTIST, "Occultist", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 60}, {SENSE, 20}}}
+    },
+    {ALCHEMIST, "Alchemist", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {WIZARD, "Wizard", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+        {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
+        {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
+    },
+    {SLAYER, "Slayer", 10, {10, 25, 10, 8, 15, 13, 7, 8},
+        {AVG, AVG, HIGH, AVG, AVG, HIGH, HIGH, LOW, AVG},
+        {2, (SkillRank[2]){{OCCULT, 30}, {TRACKING, 60}}}
+    },
+    {SURFACEWALKER, "Surfacewalker", 14, {10, 25, 10, 8, 15, 13, 7, 13},
+        {AVG, AVG, HIGH, AVG, AVG, HIGH, HIGH, LOW, HIGH},
+        {2, (SkillRank[2]){{ATTUNEMENT, 40}, {INSIGHT, 60}}}
+    },
+    {ACCURSED, "Accursed", 18, {10, 25, 10, 8, 15, 13, 7, 13},
+        {AVG, HIGH, HIGH, AVG, AVG, HIGH, HIGH, AVG, XLOW},
+        {2, (SkillRank[2]){{STEALTH, 50}, {TRACKING, 60}}}
     }
 };
 

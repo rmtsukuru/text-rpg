@@ -5,7 +5,7 @@
 #include "player.h"
 #include "skill.h"
 
-extern ClassData class_list[5];
+extern ClassData class_list[18];
 
 int getBaseHp(Class class);
 

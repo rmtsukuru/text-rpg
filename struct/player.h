@@ -12,10 +12,23 @@ typedef enum {
 
 typedef enum {
     ROGUE,
-    FIGHTER,
-    MAGE,
+    NOMAD,
+    KNIGHT,
+    SCOUT,
+    MONK,
+    BARD,
+    WARLOCK,
+    ORACLE,
     PRIESTESS,
-    MONK
+    WITCH,
+    SHAMAN,
+    SORCERER,
+    OCCULTIST,
+    ALCHEMIST,
+    WIZARD,
+    SLAYER,
+    SURFACEWALKER,
+    ACCURSED
 } Class;
 
 typedef struct {
