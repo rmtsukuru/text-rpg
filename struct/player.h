@@ -11,13 +11,13 @@ typedef enum {
 } Pronoun;
 
 typedef enum {
-    ROGUE,
+    ROGUE,          // MARTIAL
     NOMAD,
     KNIGHT,
-    SCOUT,
+    SCOUT,          // MYSTICAL
     MONK,
     BARD,
-    WARLOCK,
+    WARLOCK,        // MAGICAL
     ORACLE,
     PRIESTESS,
     WITCH,
@@ -26,7 +26,7 @@ typedef enum {
     OCCULTIST,
     ALCHEMIST,
     WIZARD,
-    SLAYER,
+    SLAYER,         // HYBRID
     SURFACEWALKER,
     ACCURSED
 } Class;
