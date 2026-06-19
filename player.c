@@ -51,8 +51,13 @@ void createNewAdventurer(Party* party) {
     for (int i = 0; i < class_count; i++) {
         class_options[i] = class_list[i].name;
     }
-    byte class_index = listMenuPrompt("What class is this character? Options include:", class_options, class_count);
-    class = class_list[class_index].class;
+    byte repeat = 1;
+    while (repeat) {
+        byte class_index = listMenuPrompt("What class is this character? Options include:", class_options, class_count);
+        class = class_list[class_index].class;
+        printf("\n%s", class_list[class_index].name);
+        repeat = !yesNoPrompt("Is this the path you have chosen?", 0);
+    }
 
     printf("How many experience points (EXP) does this character have? ");
     scanf("%d", &exp);
@@ -92,10 +97,7 @@ void createParty(Party* party) {
     int add_more_pcs = 1;
 
     while (party->size < MAX_PARTY_SIZE && add_more_pcs) {
-        printf("Add another character (Y/n)? ");
-        char response;
-        scanf(" %c", &response);
-        if (response == 'Y' || response == 'y') {
+        if (yesNoPrompt("Add another character?", 0)) {
             createNewAdventurer(party);
         } else {
             add_more_pcs = 0;
