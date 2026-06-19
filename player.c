@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "data/text.h"
 #include "menu.h"
 #include "skill.h"
 #include "player.h"
@@ -55,7 +56,8 @@ void createNewAdventurer(Party* party) {
     while (repeat) {
         byte class_index = listMenuPrompt("What class is this character? Options include:", class_options, class_count);
         class = class_list[class_index].class;
-        printf("\n%s", class_list[class_index].name);
+        char* description = getClassDescription(class);
+        printf("%s - %s\n", class_list[class_index].name, description);
         repeat = !yesNoPrompt("Is this the path you have chosen?", 0);
     }
 
