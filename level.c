@@ -167,6 +167,26 @@ Attributes* getBaseAttributes(Class class) {
     return &data->base_stats;
 }
 
+byte getClassCount() {
+    return sizeof(class_list) / sizeof(ClassData);
+}
+
+// TODO refactor this
+char* getClassName(Adventurer* pc) {
+    int class_count = getClassCount();
+    for (int i = 0; i < class_count; i++) {
+        if (class_list[i].class == pc->class) {
+            return class_list[i].name;
+        }
+    }
+}
+
+void loadClassOptions(char** options, byte count) {
+    for (int i = 0; i < count; i++) {
+        options[i] = class_list[i].name;
+    }
+}
+
 Skills* getClassSkills(Class class) {
     ClassData* data = getClassData(class);
     return &data->base_skills;

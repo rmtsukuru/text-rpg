@@ -47,17 +47,15 @@ void createNewAdventurer(Party* party) {
     Pronoun pronoun = pronoun_list[selection];
 
     Class class;
-    int class_count = sizeof(class_list)/sizeof(ClassData);
+    int class_count = getClassCount();
     char* class_options[class_count];
-    for (int i = 0; i < class_count; i++) {
-        class_options[i] = class_list[i].name;
-    }
+    loadClassOptions(class_options, class_count);
     byte repeat = 1;
     while (repeat) {
         byte class_index = listMenuPrompt("What class is this character? Options include:", class_options, class_count);
-        class = class_list[class_index].class;
+        class = (Class) class_index;
         char* description = getClassDescription(class);
-        printf("%s - %s\n", class_list[class_index].name, description);
+        printf("%s: \n%s\n", class_options[class_index], description);
         repeat = !yesNoPrompt("Is this the path you have chosen?", 0);
     }
 
@@ -124,14 +122,5 @@ void cleanupPlayerData(Player* player) {
     }
     free(player->party.party_members);
     player->party.party_members = NULL;
-}
-
-char* getClass(Adventurer* pc) {
-    int class_count = sizeof(class_list)/sizeof(ClassData);
-    for (int i = 0; i < class_count; i++) {
-        if (class_list[i].class == pc->class) {
-            return class_list[i].name;
-        }
-    }
 }
 

@@ -19,7 +19,5 @@ Player createInitialPlayer(int starting_money, int starting_location);
 
 void cleanupPlayerData(Player* player);
 
-char* getClass(Adventurer* pc);
-
 #endif
 

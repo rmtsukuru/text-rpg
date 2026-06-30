@@ -79,7 +79,6 @@ byte getBackgroundCount() {
 }
 
 void loadBackgroundOptions(char** options, byte count) {
-    byte max_name_length = 30;
     for (int i = 0; i < count; i++) {
         options[i] = backgrounds[i].name;
     }

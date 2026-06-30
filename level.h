@@ -5,11 +5,15 @@
 #include "player.h"
 #include "skill.h"
 
-extern ClassData class_list[18];
-
 int getBaseHp(Class class);
 
 Attributes* getBaseAttributes(Class class);
+
+byte getClassCount();
+
+char* getClassName(Adventurer* pc);
+
+void loadClassOptions(char** options, byte count);
 
 Skills* getClassSkills(Class class);
 
