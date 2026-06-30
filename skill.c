@@ -78,24 +78,11 @@ byte getBackgroundCount() {
     return sizeof(backgrounds) / sizeof(BackgroundData);
 }
 
-char** getBackgroundOptions() {
+void loadBackgroundOptions(char** options, byte count) {
     byte max_name_length = 30;
-    byte background_count = getBackgroundCount();
-    int block_size = sizeof(char) * max_name_length * background_count;
-    char** background_options = malloc(sizeof(char*) * background_count);
-    for (int i = 0; i < background_count; i++) {
-        background_options[i] = malloc(sizeof(char) * max_name_length);
-        background_options[i] = backgrounds[i].name;
+    for (int i = 0; i < count; i++) {
+        options[i] = backgrounds[i].name;
     }
-    return background_options;
-}
-
-void cleanupBackgroundOptions(char** options) {
-    byte background_count = getBackgroundCount();
-    for (int i = 0; i < background_count; i++) {
-        free(options[i]);
-    }
-    free(options);
 }
 
 Skills* getBaseSkills(Background background) {
