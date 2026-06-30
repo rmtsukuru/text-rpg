@@ -11,7 +11,7 @@ BackgroundData* getBackgroundData(Background background);
 
 byte getBackgroundCount();
 
-char** getBackgroundOptions();
+void loadBackgroundOptions(char** options, byte count);
 
 void cleanupBackgroundOptions(char** options);
 

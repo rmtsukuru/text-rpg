@@ -66,10 +66,10 @@ void createNewAdventurer(Party* party) {
 
     Background bg;
     byte background_count = getBackgroundCount();
-    char** background_options = getBackgroundOptions();
+    char* background_options[background_count];
+    loadBackgroundOptions(background_options, background_count);
     byte background_index = listMenuPrompt("What is this character's background?", background_options, background_count);
     bg = (Background) background_index;
-    cleanupBackgroundOptions(background_options);
 
     Skills* base_skills = getClassSkills(class);
     byte length = base_skills->length;
