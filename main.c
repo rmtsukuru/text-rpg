@@ -35,7 +35,7 @@ void printStats(Adventurer* pc) {
 
 void printPlayerInfo(Player* player) {
     printf("Current Location: %s\n", locations[player->location]);
-    printf("Current Money: $%d\n", player->money);
+    printf("Current Money: 元%d\n", player->money);
     printf("Party:\n");
     for (int i = 0; i < player->party.size; i++) {
         printStats(&player->party.party_members[i]);
