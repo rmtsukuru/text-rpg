@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 
+#include "config/system.h"
 #include "types.h"
 #include "functions.h"
 
@@ -46,6 +47,7 @@ void printPlayerInfo(Player* player) {
 }
 
 int main(int argc, char* argv[]) {
+    configureTextEncoding();
     srand(time(NULL));
     #ifdef DEBUG
         if (argc > 1 && strcmp(argv[1], "--debug") == 0) {
