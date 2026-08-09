@@ -46,7 +46,7 @@ typedef enum {
     SENSE,              // AWA
     TRACKING,
     NAVIGATION,
-    CHARM,              // CHA
+    FASHION,            // CHA
     PERSUASION,
     DECEPTION,
     PERFORMANCE,

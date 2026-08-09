@@ -35,7 +35,7 @@ SkillData skills[] = {
     {SENSE, AWA, "Sense", 20},                      // AWA
     {TRACKING, AWA, "Tracking", 0},
     {NAVIGATION, AWA, "Navigation", 10},
-    {CHARM, CHA, "Charm", 0},                       // CHA
+    {FASHION, CHA, "Fashion", 0},                   // CHA
     {PERSUASION, CHA, "Persuasion", 15},
     {DECEPTION, CHA, "Deception", 10},
     {PERFORMANCE, CHA, "Performance", 0},
