@@ -98,7 +98,7 @@ ClassData class_list[] = {
         {LOW, XLOW, AVG, AVG, XHIGH, LOW, AVG, AVG, HIGH},
         {2, (SkillRank[2]){{ATTUNEMENT, 40}, {PERFORMANCE, 50}}}
     },
-    {WARLOCK, "Warlock", 8, {8, 15, 5, 16, 23, 17, 13, 12},
+    {FANATIC, "Fanatic", 8, {8, 15, 5, 16, 23, 17, 13, 12},
         {XLOW, LOW, HIGH, AVG, HIGH, XHIGH, HIGH, AVG, AVG},
         {2, (SkillRank[2]){{OCCULT, 45}, {SENSE, 20}}}
     },

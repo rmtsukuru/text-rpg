@@ -17,7 +17,7 @@ typedef enum {
     SCOUT,          // MYSTICAL
     MONK,
     BARD,
-    WARLOCK,        // MAGICAL
+    FANATIC,        // MAGICAL
     ORACLE,
     PRIESTESS,
     WITCH,

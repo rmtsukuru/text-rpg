@@ -11,7 +11,7 @@ char class_descriptions[18][300] = {
     "A disciple of the mystical and martial arts, who has learned to quell one's mind in the pursuit of enlightenment and harden one's fists in the heat of battle.",
     "A musically-talented entertainer with an eye for daring tales and juicy gossip alike.",
     // Magical Classes
-    "A servant of the dread spirits of the Night and keeper of that which lurks in darkness.",
+    "A faithful servant of the dread spirits of the Night and keeper for that which lurks in darkness. When others transgress against the great abyssal spirits, your magic gives voice to their unspeakable loss and frenzy.",
     "A fortune-teller who speaks of things to come in the voice of gods and spirits of the land.",
     "A caretaker of the shrines who wards off supernatural threats and wields the power of the heavens. Your magic is granted to serve the great celestial spirits and to protect the people.",
     "One who speaks with the dark spirits where the shadows lie, and is feared for powerful hexes.",
