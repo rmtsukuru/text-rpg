@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-#include "config/system.h"
 #include "types.h"
 #include "functions.h"
 

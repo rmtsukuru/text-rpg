@@ -5,6 +5,7 @@
 // When adding a new functional header, make sure to include it here too.
 
 #include "data/text.h"
+#include "config/system.h"
 
 #include "menu.h"
 #include "player.h"

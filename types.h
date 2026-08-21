@@ -8,6 +8,7 @@
 // depends on one introduced after it or it won't compile.
 
 #include "struct/math.h"
+#include "struct/skill.h"
 #include "struct/player.h"
 #include "struct/class.h"
 
