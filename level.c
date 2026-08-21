@@ -71,6 +71,10 @@ int level_table[] = {
     3305000,   // Level 60
 };
 
+// The number of classes to remove from the end of the class list
+// unless player is on New Game Plus.
+const byte new_game_plus_classes = 3;
+
 // TODO fill in remaining class skill ranks and fix stats
 // (now that all EIGHTEEN classes have been added lol)
 ClassData class_list[] = {
@@ -168,7 +172,12 @@ Attributes* getBaseAttributes(Class class) {
 }
 
 byte getClassCount() {
-    return sizeof(class_list) / sizeof(ClassData);
+    byte class_count = sizeof(class_list) / sizeof(ClassData);
+#ifdef NEW_GAME_PLUS
+    return class_count;
+#else
+    return class_count - new_game_plus_classes;
+#endif
 }
 
 // TODO refactor this
