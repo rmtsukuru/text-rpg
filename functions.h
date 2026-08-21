@@ -6,6 +6,7 @@
 
 #include "data/text.h"
 #include "config/system.h"
+#include "config/options.h"
 
 #include "menu.h"
 #include "player.h"

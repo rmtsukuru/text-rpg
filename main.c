@@ -6,7 +6,6 @@
 #include "types.h"
 #include "functions.h"
 
-#define DEBUG
 
 char* locations[] = {
     "Whispering Fields",
@@ -48,13 +47,10 @@ void printPlayerInfo(Player* player) {
 int main(int argc, char* argv[]) {
     configureTextEncoding();
     srand(time(NULL));
-    #ifdef DEBUG
-        if (argc > 1 && strcmp(argv[1], "--debug") == 0) {
-            printf("\n");
-            printExpThresholds();
-            return 0;
-        }
-    #endif
+    byte cliResult = parseCliArgs(argc, argv);
+    if (cliResult) {
+        return 0;
+    }
 
     int money = 300, location = 0;
 
