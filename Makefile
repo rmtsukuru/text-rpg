@@ -1,2 +1,2 @@
-rpgmake: main.c level.c player.c skill.c menu.c data/text.c config/system.c config/options.c
-	gcc main.c level.c player.c skill.c menu.c data/text.c config/*.c -o text_rpg.exe
+rpgmake: *.c *.h struct/*.h data/*.c data/*.h config/*.c config/*.h
+	gcc *.c data/*.c config/*.c -o text_rpg.exe
