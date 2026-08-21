@@ -4,9 +4,9 @@
 // All other functional headers are included in functions.h for convenience.
 // When adding a new functional header, make sure to include it here too.
 
-#include "data/text.h"
 #include "config/system.h"
 #include "config/options.h"
+#include "data/text.h"
 
 #include "menu.h"
 #include "player.h"

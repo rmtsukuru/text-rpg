@@ -5,6 +5,7 @@
 #include "data/text.h"
 #include "menu.h"
 #include "skill.h"
+#include "level.h"
 #include "player.h"
 
 char* getStringFromPronoun(Pronoun pronoun) {

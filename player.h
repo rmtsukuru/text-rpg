@@ -2,10 +2,7 @@
 #define PLAYER_H
 
 #include "types.h"
-#include "level.h"
-
-#define MAX_NAME_LENGTH 50
-#define MAX_PARTY_SIZE 4
+#include "config/options.h"
 
 char* getStringFromPronoun(Pronoun pronoun);
 
