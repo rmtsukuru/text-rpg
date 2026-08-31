@@ -1,7 +1,7 @@
 
 #include "text.h"
 
-char class_descriptions[18][300] = {
+char* class_descriptions[] = {
     // Martial Classes
     "A thief with a cunning mind and a cold heart.",
     "An agile warrior of the plains, skilled with both the bow and the blade.",
